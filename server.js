@@ -1,19 +1,14 @@
 const http = require("http");
 const dotenv = require("dotenv");
-const loadAjaxData = require("./functions/loadAjaxData");
+
+const { loadAjaxData } = require("./functions/loadAjaxData");
 
 dotenv.config();
 
 const port = +process.env.PORT || 3001;
 
 const server = http.createServer((req, res) => {
-  if (req.url === "/favicon.ico") {
-    res.writeHead(404);
-    res.end();
-    return;
-  }
-
-  loadAjaxData.loadAjaxData((jokes) => {
+  loadAjaxData((jokes) => {
     const html = [];
     html.push("<ul>");
 
